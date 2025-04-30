@@ -27,9 +27,10 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - http:
+    - host: hello.local.nejlikka.com
+      http:
         paths:
-          - path: /hello
+          - path: /
             pathType: Prefix
             backend:
               service:
@@ -74,7 +75,7 @@ spec:
               name: nginx-web-svc
           volumeMounts:
             - name: hello-world-volume
-              mountPath: /usr/share/nginx/html/hello
+              mountPath: /usr/share/nginx/html
       volumes:
         - name: hello-world-volume
           configMap:
