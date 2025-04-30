@@ -1,0 +1,1 @@
+kube port-forward -n longhorn-system svc/longhorn-frontend 8000:80 --address='0.0.0.0'

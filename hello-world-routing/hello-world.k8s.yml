@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hello-world
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-world
+  namespace: hello-world
+data:
+  index.html: |
+    <html>
+    <head>
+      <title>Hello World!</title>
+    </head>
+    <body>Hello World!</body>
+    </html>
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-world
+  namespace: hello-world
+spec:
+  ingressClassName: traefik
+  rules:
+    - http:
+        paths:
+          - path: /hello
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-world
+                port:
+                  number: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world
+  namespace: hello-world
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+  selector:
+    app: hello-world
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-nginx
+  namespace: hello-world
+spec:
+  selector:
+    matchLabels:
+      app: hello-world
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+              name: nginx-web-svc
+          volumeMounts:
+            - name: hello-world-volume
+              mountPath: /usr/share/nginx/html/hello
+      volumes:
+        - name: hello-world-volume
+          configMap:
+            name: hello-world
