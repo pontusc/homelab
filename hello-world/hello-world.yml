@@ -24,6 +24,10 @@ kind: Ingress
 metadata:
   name: hello-world
   namespace: hello-world
+  annotations:
+    cert-manager.io/cluster-issuer: selfsigned-issuer
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-https@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
@@ -37,6 +41,10 @@ spec:
                 name: hello-world
                 port:
                   number: 80
+  tls:
+    - hosts:
+        - hello.local.nejlikka.com
+      secretName: hello-world-cert
 
 ---
 apiVersion: v1
