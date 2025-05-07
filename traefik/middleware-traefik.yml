@@ -1,8 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: traefik
+
+---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: redirect-https
-  namespace: kube-system
+  namespace: traefik
 spec:
   redirectScheme:
     scheme: https
