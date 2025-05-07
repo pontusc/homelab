@@ -3,21 +3,21 @@ kind: Namespace
 metadata:
   name: aboutme
 
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: aboutme-cert
-  namespace: aboutme
-spec:
-  secretName: aboutme-tls-secret
-  issuerRef:
-    name: selfsigned-issuer
-    kind: ClusterIssuer
-  dnsNames:
-    - nejlikka.com
-      www.nejlikka.com
-
+# ---
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: aboutme-cert
+#   namespace: aboutme
+# spec:
+#   secretName: aboutme-tls-secret
+#   issuerRef:
+#     name: selfsigned-issuer
+#     kind: ClusterIssuer
+#   dnsNames:
+#     - nejlikka.com
+#       www.nejlikka.com
+#
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -44,7 +44,7 @@ spec:
   tls:
     - hosts:
         - nejlikka.com
-      secretName: aboutme-tls-secret
+      secretName: aboutme-cert
 
 ---
 apiVersion: v1
