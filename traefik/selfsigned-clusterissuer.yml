@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-issuer
+  namespace: cert-manager
+spec:
+  ca:
+    secretName: homelab-certs
+
+  # acme:
+  #   email: pontuscurtsson@gmail.com
+  #   server: https://acme-v02.api.letsencrypt.org/directory
+  #   privateKeySecretRef:
+  #     name: letsencrypt-issuer-key
+  #   solvers:
+  #     - http01:
+  #         ingress:
+  #           ingressClassName: traefik

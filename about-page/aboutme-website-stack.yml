@@ -1,16 +1,32 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: web-aboutme
+  name: aboutme
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: aboutme-cert
+  namespace: aboutme
+spec:
+  secretName: aboutme-tls-secret
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - nejlikka.com
+      www.nejlikka.com
 
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-aboutme
-  namespace: web-aboutme
+  namespace: aboutme
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-https@kubernetescrd
 spec:
   ingressClassName: traefik
@@ -26,16 +42,16 @@ spec:
                 port:
                   number: 80
   tls:
-    - secretName: aboutme-tls
-      hosts:
+    - hosts:
         - nejlikka.com
+      secretName: aboutme-tls-secret
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: svc-aboutme
-  namespace: web-aboutme
+  namespace: aboutme
 spec:
   ports:
     - port: 80
@@ -48,7 +64,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-aboutme
-  namespace: web-aboutme
+  namespace: aboutme
 spec:
   selector:
     matchLabels:
