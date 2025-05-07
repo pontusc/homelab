@@ -5,13 +5,16 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
+    additionalArguments:
+      - "--api"
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
     ingressRoute:
       dashboard:
         enabled: true
-        matchRule: PathPrefix(`/dashboard`) && Host(`traefik.local.nejlikka.com`)
-    ports:
-      traefik:
-        expose: true
+        matchRule: Host(`traefik.local.nejlikka.com`)
+        entryPoints:
+          - web
     logs:
       access:
         enabled: true
