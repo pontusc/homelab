@@ -1,2 +1,0 @@
-#!/bin/bash
-cp ./values.yml /var/lib/rancher/k3s/server/manifests/traefik-config.yaml
