@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-cert
+  namespace: kube-system
+spec:
+  secretName: wildcard-default-cert
+  dnsNames:
+    - "nejlikka.com"
+    - "*.nejlikka.com"
+    - "*.local.nejlikka.com"
+  issuerRef:
+    name: cloudflare-le-issuer
+    kind: ClusterIssuer
