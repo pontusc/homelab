@@ -31,6 +31,16 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
+    - host: www.nejlikka.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: svc-aboutme
+                port:
+                  number: 80
     - host: nejlikka.com
       http:
         paths:
@@ -44,6 +54,7 @@ spec:
   tls:
     - hosts:
         - nejlikka.com
+        - www.nejlikka.com
       secretName: aboutme-cert
 
 ---
