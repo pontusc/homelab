@@ -1,2 +1,0 @@
-Apply -ns first, then second file
-run curl whoami.127.0.0.1.sslip.io
