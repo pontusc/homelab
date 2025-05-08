@@ -8,7 +8,6 @@ spec:
     additionalArguments:
       - "--api"
       - "--api.dashboard=true"
-      - "--api.insecure=true"
     ingressRoute:
       dashboard:
         enabled: true
