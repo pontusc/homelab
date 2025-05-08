@@ -6,4 +6,4 @@ Base setup is k3s default install
  - Certs: cert-manager
  - CSI: longhorn
  - GitOps (TODO): *ArgoCD*
- - Monitoring: Grafana stack
+ - Monitoring (todo): Grafana stack
