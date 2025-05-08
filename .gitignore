@@ -1,3 +1,4 @@
-traefik/certs/*.key
-traefik/certs/*.crt
-traefik/homelab-certs.yml
+traefik*/certs/*.key
+traefik*/certs/*.crt
+traefik*/certs/homelab-certs.yml
+traefik*/issuers/secret*
