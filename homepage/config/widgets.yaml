@@ -24,5 +24,5 @@
 #     labels: true
 #     nodes: true
 - search:
-    provider: duckduckgo
+    provider: google
     target: _blank

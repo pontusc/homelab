@@ -5,8 +5,8 @@ Base setup is k3s default install
  - Ingress: traefik
  - Certs: cert-manager
  - CSI: longhorn
+ - Monitoring: Grafana stack
  - GitOps (TODO): *ArgoCD*
- - Monitoring (TODO): Grafana stack
 
 ## TODO
 Longhorn backups\

@@ -2,6 +2,23 @@ description: Homelab
 title: Homelab
 background: https://w.wallhaven.cc/full/d6/wallhaven-d6j79o.png
 statusStyle: "dot"
+cardBlur: md
+theme: dark
+language: en
+disableCollapse: true
+
+layout:
+  Cluster Management:
+    icon: kubernetes.png
+    useEqualHeight: true
+    style: row
+    columns: 4
+  Deployments:
+    style: row
+    columns: 4
+  Developer:
+    iconsOnly: true
+
 providers:
   longhorn:
     url: https://longhorn.local.nejlikka.com
