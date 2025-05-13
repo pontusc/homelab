@@ -1,14 +1,24 @@
-- My First Group:
-    - My First Service:
-        href: http://localhost/
-        description: Homepage is awesome
+- Cluster Management:
+    - Traefik:
+        href: https://traefik.local.nejlikka.com
+        siteMonitor: https://traefik.local.nejlikka.com
+        icon: traefik.png
+        description: Ingress
 
-- My Second Group:
-    - My Second Service:
-        href: http://localhost/
-        description: Homepage is the best
+    - Longhorn:
+        href: https://longhorn.local.nejlikka.com
+        siteMonitor: https://longhorn.local.nejlikka.com
+        icon: longhorn.png
+        description: CSI Provider
 
-- My Third Group:
-    - My Third Service:
-        href: http://localhost/
-        description: Homepage is 😎
+    - Grafana:
+        href: https://grafana.local.nejlikka.com
+        siteMonitor: https://grafana.local.nejlikka.com
+        icon: grafana.png
+        description: Reports & Alerts
+
+    - Prometheus:
+        href: https://prometheus.local.nejlikka.com
+        siteMonitor: https://prometheus.local.nejlikka.com
+        icon: prometheus.png
+        description: Cluster logs

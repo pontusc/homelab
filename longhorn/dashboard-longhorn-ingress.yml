@@ -7,6 +7,12 @@ metadata:
     cert-manager.io/cluster-issuer: cloudflare-le-issuer
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-https@kubernetescrd
+    # gethomepage.dev/description: Longhorn dashboard
+    # gethomepage.dev/name: Longhorn
+    # gethomepage.dev/enabled: "true"
+    # gethomepage.dev/group: Cluster Management
+    # gethomepage.dev/icon: longhorn.png
+    # gethomepage.dev/pod-selector: app=longhorn-ui
 spec:
   ingressClassName: traefik
   rules:

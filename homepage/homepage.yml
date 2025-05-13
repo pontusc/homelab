@@ -113,11 +113,6 @@ metadata:
     cert-manager.io/cluster-issuer: cloudflare-le-issuer
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-https@kubernetescrd
-    gethomepage.dev/description: Dynamically Detected Homepage
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/group: Cluster Management
-    gethomepage.dev/icon: homepage.png
-    gethomepage.dev/name: Homepage
 spec:
   ingressClassName: traefik
   rules:

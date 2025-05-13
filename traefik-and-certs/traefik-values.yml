@@ -12,6 +12,15 @@ spec:
       dashboard:
         enabled: true
         matchRule: Host(`traefik.local.nejlikka.com`)
+        annotations:
+          # Below are for automatic homepage discovery, decided to specify in homepage file instead
+          # gethomepage.dev/description: Traefik dashboard
+          # gethomepage.dev/href: "https://traefik.local.nejlikka.com/dashboard/#/"
+          # gethomepage.dev/name: Traefik
+          # gethomepage.dev/enabled: "true"
+          # gethomepage.dev/group: Cluster Management
+          # gethomepage.dev/icon: traefik.png
+          # gethomepage.dev/pod-selector: app.kubernetes.io/name=traefik
         entryPoints:
           - websecure
     ports:

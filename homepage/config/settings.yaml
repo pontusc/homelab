@@ -1,6 +1,7 @@
 description: Homelab
 title: Homelab
 background: https://w.wallhaven.cc/full/d6/wallhaven-d6j79o.png
+statusStyle: "dot"
 providers:
   longhorn:
     url: https://longhorn.local.nejlikka.com
