@@ -18,69 +18,6 @@ secrets:
   - name: homepage
 
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: homepage
-  namespace: homepage
-  labels:
-    app.kubernetes.io/name: homepage
-data:
-  kubernetes.yaml: |
-    ingress: true
-    traefik: true
-    mode: default
-  settings.yaml: |
-    providers:
-      longhorn:
-        url: https://longhorn.local.nejlikka.com
-  custom.css: ""
-  custom.js: ""
-  bookmarks.yaml: |
-    - Developer:
-        - Github:
-            - abbr: GH
-              href: https://github.com/
-  services.yaml: |
-    - My First Group:
-        - My First Service:
-            href: http://localhost/
-            description: Homepage is awesome
-
-    - My Second Group:
-        - My Second Service:
-            href: http://localhost/
-            description: Homepage is the best
-
-    - My Third Group:
-        - My Third Service:
-            href: http://localhost/
-            description: Homepage is 😎
-  widgets.yaml: |
-    - kubernetes:
-        cluster:
-          show: true
-          cpu: true
-          memory: true
-          showLabel: true
-          label: "cluster"
-        nodes:
-          show: true
-          cpu: true
-          memory: true
-          showLabel: true
-    - resources:
-        backend: resources
-        expanded: true
-        cpu: true
-        memory: true
-        network: default
-    - search:
-        provider: duckduckgo
-        target: _blank
-  docker.yaml: ""
-
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -264,7 +201,8 @@ spec:
               name: logs
       volumes:
         - name: homepage-config
-          configMap:
-            name: homepage
+          hostPath:
+            path: /home/pontusc/homelab/homepage/config/
+            type: Directory
         - name: logs
           emptyDir: {}
