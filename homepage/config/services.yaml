@@ -19,11 +19,6 @@
       siteMonitor: https://grafana.local.nejlikka.com
       icon: grafana.png
       description: Reports & Alerts
-      widget:
-        type: grafana
-        url: https://grafana.local.nejlikka.com
-        username: admin
-        password:
 
   - Prometheus:
       href: https://prometheus.local.nejlikka.com

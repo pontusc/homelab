@@ -10,7 +10,7 @@ disableCollapse: true
 layout:
   Cluster Management:
     icon: kubernetes.png
-    useEqualHeight: true
+    useEqualHeights: true
     style: row
     columns: 4
   Deployments:
