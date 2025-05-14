@@ -2,6 +2,7 @@
 Base setup is k3s default install
 
 ## Components
+ - Management: Rancher
  - Ingress: traefik
  - Certs: cert-manager
  - CSI: longhorn
