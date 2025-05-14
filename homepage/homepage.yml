@@ -1,4 +1,3 @@
----
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -15,7 +14,7 @@ metadata:
   labels:
     app.kubernetes.io/name: homepage
 secrets:
-  - name: homepage
+- name: homepage
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -25,46 +24,46 @@ metadata:
   labels:
     app.kubernetes.io/name: homepage
 rules:
-  - apiGroups:
-      - ""
-    resources:
-      - namespaces
-      - pods
-      - nodes
-    verbs:
-      - get
-      - list
-  - apiGroups:
-      - extensions
-      - networking.k8s.io
-    resources:
-      - ingresses
-    verbs:
-      - get
-      - list
-  - apiGroups:
-      - traefik.io
-    resources:
-      - ingressroutes
-    verbs:
-      - get
-      - list
-  - apiGroups:
-      - gateway.networking.k8s.io
-    resources:
-      - httproutes
-      - gateways
-    verbs:
-      - get
-      - list
-  - apiGroups:
-      - metrics.k8s.io
-    resources:
-      - nodes
-      - pods
-    verbs:
-      - get
-      - list
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  - pods
+  - nodes
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - extensions
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - traefik.io
+  resources:
+  - ingressroutes
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - gateway.networking.k8s.io
+  resources:
+  - httproutes
+  - gateways
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - metrics.k8s.io
+  resources:
+  - nodes
+  - pods
+  verbs:
+  - get
+  - list
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -78,9 +77,9 @@ roleRef:
   kind: ClusterRole
   name: homepage
 subjects:
-  - kind: ServiceAccount
-    name: homepage
-    namespace: homepage
+- kind: ServiceAccount
+  name: homepage
+  namespace: homepage
 
 ---
 apiVersion: v1
@@ -94,10 +93,10 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 3000
-      targetPort: http
-      protocol: TCP
-      name: http
+  - port: 3000
+    targetPort: http
+    protocol: TCP
+    name: http
   selector:
     app.kubernetes.io/name: homepage
 
@@ -110,26 +109,26 @@ metadata:
   labels:
     app.kubernetes.io/name: homepage
   annotations:
-    cert-manager.io/cluster-issuer: cloudflare-le-issuer
+    # cert-manager.io/cluster-issuer: cloudflare-le-issuer
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-https@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
-    - host: homepage.local.nejlikka.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: homepage
-                port:
-                  number: 3000
-  tls:
-    - secretName: homepage-cert
-      hosts:
-        - homepage.local.nejlikka.com
+  - host: homepage.local.nejlikka.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: homepage
+            port:
+              number: 3000
+              # tls:
+              # - secretName: homepage-cert
+              #   hosts:
+              #   - homepage.local.nejlikka.com
 
 ---
 apiVersion: apps/v1
@@ -157,47 +156,47 @@ spec:
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       containers:
-        - name: homepage
-          image: "ghcr.io/gethomepage/homepage:latest"
-          imagePullPolicy: Always
-          env:
-            - name: HOMEPAGE_ALLOWED_HOSTS
-              value: homepage.local.nejlikka.com # required, may need port
-          ports:
-            - name: http
-              containerPort: 3000
-              protocol: TCP
-          volumeMounts:
-            - mountPath: /app/config/custom.js
-              name: homepage-config
-              subPath: custom.js
-            - mountPath: /app/config/custom.css
-              name: homepage-config
-              subPath: custom.css
-            - mountPath: /app/config/bookmarks.yaml
-              name: homepage-config
-              subPath: bookmarks.yaml
-            - mountPath: /app/config/docker.yaml
-              name: homepage-config
-              subPath: docker.yaml
-            - mountPath: /app/config/kubernetes.yaml
-              name: homepage-config
-              subPath: kubernetes.yaml
-            - mountPath: /app/config/services.yaml
-              name: homepage-config
-              subPath: services.yaml
-            - mountPath: /app/config/settings.yaml
-              name: homepage-config
-              subPath: settings.yaml
-            - mountPath: /app/config/widgets.yaml
-              name: homepage-config
-              subPath: widgets.yaml
-            - mountPath: /app/config/logs
-              name: logs
+      - name: homepage
+        image: "ghcr.io/gethomepage/homepage:latest"
+        imagePullPolicy: Always
+        env:
+        - name: HOMEPAGE_ALLOWED_HOSTS
+          value: homepage.local.nejlikka.com # required, may need port
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /app/config/custom.js
+          name: homepage-config
+          subPath: custom.js
+        - mountPath: /app/config/custom.css
+          name: homepage-config
+          subPath: custom.css
+        - mountPath: /app/config/bookmarks.yaml
+          name: homepage-config
+          subPath: bookmarks.yaml
+        - mountPath: /app/config/docker.yaml
+          name: homepage-config
+          subPath: docker.yaml
+        - mountPath: /app/config/kubernetes.yaml
+          name: homepage-config
+          subPath: kubernetes.yaml
+        - mountPath: /app/config/services.yaml
+          name: homepage-config
+          subPath: services.yaml
+        - mountPath: /app/config/settings.yaml
+          name: homepage-config
+          subPath: settings.yaml
+        - mountPath: /app/config/widgets.yaml
+          name: homepage-config
+          subPath: widgets.yaml
+        - mountPath: /app/config/logs
+          name: logs
       volumes:
-        - name: homepage-config
-          hostPath:
-            path: /home/pontusc/homelab/homepage/config/
-            type: Directory
-        - name: logs
-          emptyDir: {}
+      - name: homepage-config
+        hostPath:
+          path: /home/pontusc/homelab/homepage/config/
+          type: Directory
+      - name: logs
+        emptyDir: {}
