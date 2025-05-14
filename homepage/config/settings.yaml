@@ -12,12 +12,14 @@ layout:
     icon: kubernetes.png
     useEqualHeights: true
     style: row
-    columns: 4
+    columns: 2
   Deployments:
     style: row
     columns: 4
-  Developer:
-    iconsOnly: true
+  Repositories:
+    style: row
+    columns: 4
+    useEqualHeights: true
 
 providers:
   longhorn:
