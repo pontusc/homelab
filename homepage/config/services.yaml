@@ -8,6 +8,21 @@
         type: traefik
         url: https://traefik.local.nejlikka.com
 
+  - Prometheus:
+      href: https://prometheus.local.nejlikka.com
+      siteMonitor: https://prometheus.local.nejlikka.com
+      icon: prometheus.png
+      description: Cluster logs
+      widget:
+        type: prometheus
+        url: https://prometheus.local.nejlikka.com
+
+  - Rancher:
+      href: https://rancher.local.nejlikka.com
+      siteMonitor: https://grafana.local.nejlikka.com
+      icon: rancher.png
+      description: Kubernetes management
+
   - Longhorn:
       href: https://longhorn.local.nejlikka.com
       siteMonitor: https://longhorn.local.nejlikka.com
@@ -19,12 +34,3 @@
       siteMonitor: https://grafana.local.nejlikka.com
       icon: grafana.png
       description: Reports & Alerts
-
-  - Prometheus:
-      href: https://prometheus.local.nejlikka.com
-      siteMonitor: https://prometheus.local.nejlikka.com
-      icon: prometheus.png
-      description: Cluster logs
-      widget:
-        type: prometheus
-        url: https://prometheus.local.nejlikka.com
