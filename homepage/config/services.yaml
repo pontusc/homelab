@@ -17,6 +17,12 @@
         type: prometheus
         url: https://prometheus.local.nejlikka.com
 
+  - ArgoCD:
+      href: https://argocd.local.nejlikka.com
+      siteMonitor: https://argocd.local.nejlikka.com
+      icon: argo-cd.png
+      description: Kubernetes GitOps
+
   - Rancher:
       href: https://rancher.local.nejlikka.com
       siteMonitor: https://grafana.local.nejlikka.com
