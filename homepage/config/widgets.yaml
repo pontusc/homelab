@@ -26,3 +26,13 @@
 - search:
     provider: google
     target: _blank
+
+- openweathermap:
+    label: Stockholm
+    latitude: 59.3377
+    longitude: 18.0900
+    units: metric # or imperial
+    provider: openweathermap
+    cache: 10 # Time in minutes to cache API responses, to stay within limits
+    format: # optional, Intl.NumberFormat options
+      maximumFractionDigits: 1
