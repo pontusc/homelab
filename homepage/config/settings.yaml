@@ -20,6 +20,3 @@ layout:
     style: row
     columns: 4
     useEqualHeights: true
-
-providers:
-  openweathermap: APIKEY

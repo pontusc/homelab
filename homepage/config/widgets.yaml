@@ -23,16 +23,13 @@
 #     total: true
 #     labels: true
 #     nodes: true
-- search:
-    provider: google
-    target: _blank
 
-- openweathermap:
-    label: Stockholm
+- openmeteo:
+    label: Stockholm # optional
     latitude: 59.3377
     longitude: 18.0900
+    timezone: Europe/Stockholm # optional
     units: metric # or imperial
-    provider: openweathermap
-    cache: 10 # Time in minutes to cache API responses, to stay within limits
+    cache: 5 # Time in minutes to cache API responses, to stay within limits
     format: # optional, Intl.NumberFormat options
       maximumFractionDigits: 1
