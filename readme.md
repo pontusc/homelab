@@ -8,7 +8,7 @@ Base setup is k3s default install
  - CSI: longhorn
  - CNI: flannel
  - Monitoring: Grafana stack
- - GitOps (TODO): *ArgoCD*
+ - GitOps: ArgoCD
 
 ## Services
  - Homepage
