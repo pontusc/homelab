@@ -1,5 +1,6 @@
-# Information about homelab
+# Homelab setup
 Base setup is k3s default install
+Running on a single NUC, with virtualized nodes (soon).
 
 ## Components
  - Management: Rancher
@@ -7,7 +8,7 @@ Base setup is k3s default install
  - Certs: cert-manager
  - CSI: longhorn
  - CNI: flannel
- - Monitoring: Grafana stack
+ - Monitoring: Grafana stack (loki TBA)
  - GitOps: ArgoCD
 
 ## Services
@@ -15,10 +16,8 @@ Base setup is k3s default install
  - Emby (TODO)
 
 ## TODO
-Longhorn backups\
-Uptime kuma deployment for all apps\
-Add ArgoCD and restructure repo to an apps/***-deployment folder structure\
+Current structure is k3s hosted on a single node. Will change for k3s to run on 1 manager node and 2 worker nodes, which will be running on 3 vm's to simulate a "real" environment. 
 
 ## Troubleshooting reminders for myself
-Check logs for failing pods with -p flags to see previous containers logs.
+Check logs for failing pods with -p flags to see previous containers logs in case of CrashLoopback...
 Helm lint -f to inspect values files
