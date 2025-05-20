@@ -1,3 +1,0 @@
-ingress: true
-traefik: true
-mode: cluster

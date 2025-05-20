@@ -11,7 +11,7 @@ Base setup is k3s default install
  - GitOps: ArgoCD
 
 ## Services
- - Homepage
+ - [Homepage](https://github.com/pontusc/homepage)
  - Emby (TODO)
 
 ## TODO
