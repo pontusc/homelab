@@ -27,8 +27,6 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: cloudflare-le-issuer
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    traefik.ingress.kubernetes.io/router.middlewares: |
-      authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
     gethomepage.dev/description: Landing page for myself
     gethomepage.dev/name: Landing page
     gethomepage.dev/enabled: "true"
