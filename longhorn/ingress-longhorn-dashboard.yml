@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: longhorn.local.nejlikka.com
+  - host: longhorn.nejlikka.com
     http:
       paths:
       - path: /
@@ -22,5 +22,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    - longhorn.local.nejlikka.com
+    - longhorn.nejlikka.com
     secretName: longhorn-dashboard-cert

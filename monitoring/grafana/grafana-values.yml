@@ -138,14 +138,13 @@ testFramework:
 
 # dns configuration for pod
 dnsPolicy: ~
-dnsConfig:
-  {}
-  # nameservers:
-  #   - 8.8.8.8
-  #   options:
-  #   - name: ndots
-  #     value: "2"
-  #   - name: edns0
+dnsConfig: {}
+# nameservers:
+#   - 8.8.8.8
+#   options:
+#   - name: ndots
+#     value: "2"
+#   - name: edns0
 
 securityContext:
   runAsNonRoot: true
@@ -157,7 +156,7 @@ containerSecurityContext:
   allowPrivilegeEscalation: false
   capabilities:
     drop:
-      - ALL
+    - ALL
   seccompProfile:
     type: RuntimeDefault
 
@@ -166,19 +165,17 @@ createConfigmap: true
 
 # Extra configmaps to mount in grafana pods
 # Values are templated.
-extraConfigmapMounts:
-  []
-  # - name: certs-configmap
-  #   mountPath: /etc/grafana/ssl/
-  #   subPath: certificates.crt # (optional)
-  #   configMap: certs-configmap
-  #   readOnly: true
-  #   optional: false
+extraConfigmapMounts: []
+# - name: certs-configmap
+#   mountPath: /etc/grafana/ssl/
+#   subPath: certificates.crt # (optional)
+#   configMap: certs-configmap
+#   readOnly: true
+#   optional: false
 
-extraEmptyDirMounts:
-  []
-  # - name: provisioning-notifiers
-  #   mountPath: /etc/grafana/provisioning/notifiers
+extraEmptyDirMounts: []
+# - name: provisioning-notifiers
+#   mountPath: /etc/grafana/provisioning/notifiers
 
 # Apply extra labels to common labels.
 extraLabels: {}
@@ -202,7 +199,7 @@ downloadDashboards:
     allowPrivilegeEscalation: false
     capabilities:
       drop:
-        - ALL
+      - ALL
     seccompProfile:
       type: RuntimeDefault
   envValueFrom: {}
@@ -241,9 +238,8 @@ service:
   loadBalancerClass: ""
   loadBalancerSourceRanges: []
   port: 80
-  targetPort:
-    3000
-    # targetPort: 4181 To be used with a proxy extraContainer
+  targetPort: 3000
+  # targetPort: 4181 To be used with a proxy extraContainer
   ## Service annotations. Can be templated.
   annotations: {}
   labels: {}
@@ -269,18 +265,16 @@ serviceMonitor:
   basicAuth: {}
   targetLabels: []
 
-extraExposePorts:
-  []
-  # - name: keycloak
-  #   port: 8080
-  #   targetPort: 8080
+extraExposePorts: []
+# - name: keycloak
+#   port: 8080
+#   targetPort: 8080
 
 # overrides pod.spec.hostAliases in the grafana deployment's pods
-hostAliases:
-  []
-  # - ip: "1.2.3.4"
-  #   hostnames:
-  #     - "my.host.com"
+hostAliases: []
+# - ip: "1.2.3.4"
+#   hostnames:
+#     - "my.host.com"
 
 ingress:
   enabled: true
@@ -299,7 +293,7 @@ ingress:
   pathType: Prefix
 
   hosts:
-    - grafana.local.nejlikka.com
+  - grafana.nejlikka.com
   ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
   extraPaths: []
   # - path: /*
@@ -315,9 +309,9 @@ ingress:
   #       port:
   #         name: use-annotation
   tls:
-    - secretName: grafana-cert
-      hosts:
-        - grafana.local.nejlikka.com
+  - secretName: grafana-cert
+    hosts:
+    - grafana.nejlikka.com
 
 # -- BETA: Configure the gateway routes for the chart here.
 # More routes can be added by adding a dictionary key like the 'main' route.
@@ -345,9 +339,9 @@ route:
     # - name: acme-gw
 
     matches:
-      - path:
-          type: PathPrefix
-          value: /
+    - path:
+        type: PathPrefix
+        value: /
 
     ## Filters define the filters that are applied to requests that match this rule.
     filters: []
@@ -424,11 +418,11 @@ persistence:
   ## (Optional) Use this to bind the claim to an existing PersistentVolume (PV) by name.
   volumeName: ""
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   size: 10Gi
   # annotations: {}
   finalizers:
-    - kubernetes.io/pvc-protection
+  - kubernetes.io/pvc-protection
   # selectorLabels: {}
   ## Sub-directory of the PV to mount. Can be templated.
   # subPath: ""
@@ -487,9 +481,9 @@ initChownData:
       type: RuntimeDefault
     capabilities:
       add:
-        - CHOWN
+      - CHOWN
       drop:
-        - ALL
+      - ALL
 
 # Administrator credentials when not using an existing secret (see below)
 adminUser: admin
@@ -549,12 +543,11 @@ env: {}
 ##     - name: <key>
 ##       valueFrom:
 ##         <value rendered as YAML>
-envValueFrom:
-  {}
-  #  ENV_NAME:
-  #    configMapKeyRef:
-  #      name: configmap-name
-  #      key: value_key
+envValueFrom: {}
+#  ENV_NAME:
+#    configMapKeyRef:
+#      name: configmap-name
+#      key: value_key
 
 ## The name of a secret in the same kubernetes namespace which contain values to be added to the environment
 ## This can be useful for auth tokens, etc. Value is templated.
@@ -589,84 +582,79 @@ enableServiceLinks: true
 
 ## Additional grafana server secret mounts
 # Defines additional mounts with secrets. Secrets must be manually created in the namespace.
-extraSecretMounts:
-  []
-  # - name: secret-files
-  #   mountPath: /etc/secrets
-  #   secretName: grafana-secret-files
-  #   readOnly: true
-  #   optional: false
-  #   subPath: ""
-  #
-  # for AWS EKS (cloudwatch) use the following (see also instruction in env: above)
-  # - name: aws-iam-token
-  #   mountPath: /var/run/secrets/eks.amazonaws.com/serviceaccount
-  #   readOnly: true
-  #   projected:
-  #     defaultMode: 420
-  #     sources:
-  #       - serviceAccountToken:
-  #           audience: sts.amazonaws.com
-  #           expirationSeconds: 86400
-  #           path: token
-  #
-  # for CSI e.g. Azure Key Vault use the following
-  # - name: secrets-store-inline
-  #  mountPath: /run/secrets
-  #  readOnly: true
-  #  csi:
-  #    driver: secrets-store.csi.k8s.io
-  #    readOnly: true
-  #    volumeAttributes:
-  #      secretProviderClass: "akv-grafana-spc"
-  #    nodePublishSecretRef:                       # Only required when using service principal mode
-  #       name: grafana-akv-creds                  # Only required when using service principal mode
+extraSecretMounts: []
+# - name: secret-files
+#   mountPath: /etc/secrets
+#   secretName: grafana-secret-files
+#   readOnly: true
+#   optional: false
+#   subPath: ""
+#
+# for AWS EKS (cloudwatch) use the following (see also instruction in env: above)
+# - name: aws-iam-token
+#   mountPath: /var/run/secrets/eks.amazonaws.com/serviceaccount
+#   readOnly: true
+#   projected:
+#     defaultMode: 420
+#     sources:
+#       - serviceAccountToken:
+#           audience: sts.amazonaws.com
+#           expirationSeconds: 86400
+#           path: token
+#
+# for CSI e.g. Azure Key Vault use the following
+# - name: secrets-store-inline
+#  mountPath: /run/secrets
+#  readOnly: true
+#  csi:
+#    driver: secrets-store.csi.k8s.io
+#    readOnly: true
+#    volumeAttributes:
+#      secretProviderClass: "akv-grafana-spc"
+#    nodePublishSecretRef:                       # Only required when using service principal mode
+#       name: grafana-akv-creds                  # Only required when using service principal mode
 
 ## Additional grafana server volume mounts
 # Defines additional volume mounts.
-extraVolumeMounts:
-  []
-  # - name: extra-volume-0
-  #   mountPath: /mnt/volume0
-  #   readOnly: true
-  # - name: extra-volume-1
-  #   mountPath: /mnt/volume1
-  #   readOnly: true
-  # - name: grafana-secrets
-  #   mountPath: /mnt/volume2
+extraVolumeMounts: []
+# - name: extra-volume-0
+#   mountPath: /mnt/volume0
+#   readOnly: true
+# - name: extra-volume-1
+#   mountPath: /mnt/volume1
+#   readOnly: true
+# - name: grafana-secrets
+#   mountPath: /mnt/volume2
 
 ## Additional Grafana server volumes
-extraVolumes:
-  []
-  # - name: extra-volume-0
-  #   existingClaim: volume-claim
-  # - name: extra-volume-1
-  #   hostPath:
-  #     path: /usr/shared/
-  #     type: ""
-  # - name: grafana-secrets
-  #   csi:
-  #     driver: secrets-store.csi.k8s.io
-  #     readOnly: true
-  #     volumeAttributes:
-  #       secretProviderClass: "grafana-env-spc"
+extraVolumes: []
+# - name: extra-volume-0
+#   existingClaim: volume-claim
+# - name: extra-volume-1
+#   hostPath:
+#     path: /usr/shared/
+#     type: ""
+# - name: grafana-secrets
+#   csi:
+#     driver: secrets-store.csi.k8s.io
+#     readOnly: true
+#     volumeAttributes:
+#       secretProviderClass: "grafana-env-spc"
 
 ## Container Lifecycle Hooks. Execute a specific bash command or make an HTTP request
-lifecycleHooks:
-  {}
-  # postStart:
-  #   exec:
-  #     command: []
+lifecycleHooks: {}
+# postStart:
+#   exec:
+#     command: []
 
 ## Pass the plugins you want installed as a list.
 ##
-plugins:
-  []
-  # - digrich-bubblechart-panel
-  # - grafana-clock-panel
-  ## You can also use other plugin download URL, as long as they are valid zip files,
-  ## and specify the name of the plugin after the semicolon. Like this:
-  # - https://grafana.com/api/plugins/marcusolsson-json-datasource/versions/1.3.2/download;marcusolsson-json-datasource
+plugins: []
+# - digrich-bubblechart-panel
+# - grafana-clock-panel
+## You can also use other plugin download URL, as long as they are valid zip files,
+## and specify the name of the plugin after the semicolon. Like this:
+# - https://grafana.com/api/plugins/marcusolsson-json-datasource/versions/1.3.2/download;marcusolsson-json-datasource
 
 ## Configure grafana datasources
 ## ref: http://docs.grafana.org/administration/provisioning/#datasources
@@ -694,96 +682,95 @@ datasources: {}
 ## Configure grafana alerting (can be templated)
 ## ref: https://docs.grafana.com/alerting/set-up/provision-alerting-resources/file-provisioning/
 ##
-alerting:
-  {}
-  # policies.yaml:
-  #   apiVersion: 1
-  #   policies:
-  #     - orgId: 1
-  #       receiver: first_uid
-  #
-  # rules.yaml:
-  #   apiVersion: 1
-  #   groups:
-  #     - orgId: 1
-  #       name: '{{ .Chart.Name }}_my_rule_group'
-  #       folder: my_first_folder
-  #       interval: 60s
-  #       rules:
-  #         - uid: my_id_1
-  #           title: my_first_rule
-  #           condition: A
-  #           data:
-  #             - refId: A
-  #               datasourceUid: '-100'
-  #               model:
-  #                 conditions:
-  #                   - evaluator:
-  #                       params:
-  #                         - 3
-  #                       type: gt
-  #                     operator:
-  #                       type: and
-  #                     query:
-  #                       params:
-  #                         - A
-  #                     reducer:
-  #                       type: last
-  #                     type: query
-  #                 datasource:
-  #                   type: __expr__
-  #                   uid: '-100'
-  #                 expression: 1==0
-  #                 intervalMs: 1000
-  #                 maxDataPoints: 43200
-  #                 refId: A
-  #                 type: math
-  #           dashboardUid: my_dashboard
-  #           panelId: 123
-  #           noDataState: Alerting
-  #           for: 60s
-  #           annotations:
-  #             some_key: some_value
-  #           labels:
-  #             team: sre_team_1
-  #
-  # contactpoints.yaml:
-  #   secret:
-  #     apiVersion: 1
-  #     contactPoints:
-  #       - orgId: 1
-  #         name: cp_1
-  #         receivers:
-  #           - uid: first_uid
-  #             type: pagerduty
-  #             settings:
-  #               integrationKey: XXX
-  #               severity: critical
-  #               class: ping failure
-  #               component: Grafana
-  #               group: app-stack
-  #               summary: |
-  #                 {{ `{{ include "default.message" . }}` }}
-  #
-  # templates.yaml:
-  #   apiVersion: 1
-  #   templates:
-  #     - orgId: 1
-  #       name: my_first_template
-  #       template: |
-  #         {{ `
-  #         {{ define "my_first_template" }}
-  #         Custom notification message
-  #         {{ end }}
-  #         ` }}
-  #
-  # mutetimes.yaml
-  #   apiVersion: 1
-  #   muteTimes:
-  #     - orgId: 1
-  #       name: mti_1
-  #       # refer to https://prometheus.io/docs/alerting/latest/configuration/#time_interval-0
-  #       time_intervals: {}
+alerting: {}
+# policies.yaml:
+#   apiVersion: 1
+#   policies:
+#     - orgId: 1
+#       receiver: first_uid
+#
+# rules.yaml:
+#   apiVersion: 1
+#   groups:
+#     - orgId: 1
+#       name: '{{ .Chart.Name }}_my_rule_group'
+#       folder: my_first_folder
+#       interval: 60s
+#       rules:
+#         - uid: my_id_1
+#           title: my_first_rule
+#           condition: A
+#           data:
+#             - refId: A
+#               datasourceUid: '-100'
+#               model:
+#                 conditions:
+#                   - evaluator:
+#                       params:
+#                         - 3
+#                       type: gt
+#                     operator:
+#                       type: and
+#                     query:
+#                       params:
+#                         - A
+#                     reducer:
+#                       type: last
+#                     type: query
+#                 datasource:
+#                   type: __expr__
+#                   uid: '-100'
+#                 expression: 1==0
+#                 intervalMs: 1000
+#                 maxDataPoints: 43200
+#                 refId: A
+#                 type: math
+#           dashboardUid: my_dashboard
+#           panelId: 123
+#           noDataState: Alerting
+#           for: 60s
+#           annotations:
+#             some_key: some_value
+#           labels:
+#             team: sre_team_1
+#
+# contactpoints.yaml:
+#   secret:
+#     apiVersion: 1
+#     contactPoints:
+#       - orgId: 1
+#         name: cp_1
+#         receivers:
+#           - uid: first_uid
+#             type: pagerduty
+#             settings:
+#               integrationKey: XXX
+#               severity: critical
+#               class: ping failure
+#               component: Grafana
+#               group: app-stack
+#               summary: |
+#                 {{ `{{ include "default.message" . }}` }}
+#
+# templates.yaml:
+#   apiVersion: 1
+#   templates:
+#     - orgId: 1
+#       name: my_first_template
+#       template: |
+#         {{ `
+#         {{ define "my_first_template" }}
+#         Custom notification message
+#         {{ end }}
+#         ` }}
+#
+# mutetimes.yaml
+#   apiVersion: 1
+#   muteTimes:
+#     - orgId: 1
+#       name: mti_1
+#       # refer to https://prometheus.io/docs/alerting/latest/configuration/#time_interval-0
+#       time_intervals: {}
 
 ## Configure notifiers
 ## ref: http://docs.grafana.org/administration/provisioning/#alert-notification-channels
@@ -813,14 +800,14 @@ dashboardProviders:
   dashboardproviders.yaml:
     apiVersion: 1
     providers:
-      - name: "grafana-dashboards-kubernetes"
-        orgId: 1
-        folder: "Kubernetes"
-        type: file
-        disableDeletion: true
-        editable: true
-        options:
-          path: /var/lib/grafana/dashboards/grafana-dashboards-kubernetes
+    - name: "grafana-dashboards-kubernetes"
+      orgId: 1
+      folder: "Kubernetes"
+      type: file
+      disableDeletion: true
+      editable: true
+      options:
+        path: /var/lib/grafana/dashboards/grafana-dashboards-kubernetes
 dashboards:
   grafana-dashboards-kubernetes:
     k8s-system-api-server:
@@ -969,7 +956,7 @@ sidecar:
     allowPrivilegeEscalation: false
     capabilities:
       drop:
-        - ALL
+      - ALL
     seccompProfile:
       type: RuntimeDefault
   # skipTlsVerify Set to true to skip tls verification for kube api calls
@@ -1425,12 +1412,11 @@ imageRenderer:
   ##     - name: <key>
   ##       valueFrom:
   ##         <value rendered as YAML>
-  envValueFrom:
-    {}
-    #  ENV_NAME:
-    #    configMapKeyRef:
-    #      name: configmap-name
-    #      key: value_key
+  envValueFrom: {}
+  #  ENV_NAME:
+  #    configMapKeyRef:
+  #      name: configmap-name
+  #      key: value_key
 
   # image-renderer deployment serviceAccount
   serviceAccountName: ""
@@ -1475,10 +1461,9 @@ imageRenderer:
     scrapeTimeout: 30s
     relabelings: []
     # See: https://doc.crds.dev/github.com/prometheus-operator/kube-prometheus/monitoring.coreos.com/ServiceMonitor/v1@v0.11.0#spec-targetLabels
-    targetLabels:
-      []
-      # - targetLabel1
-      # - targetLabel2
+    targetLabels: []
+    # - targetLabel1
+    # - targetLabel2
   # If https is enabled in Grafana, this needs to be set as 'https' to correctly configure the callback used in Grafana
   grafanaProtocol: http
   # In case a sub_path is used this needs to be added to the image renderer callback

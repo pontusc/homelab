@@ -398,7 +398,7 @@ server:
     ## Must be provided if Ingress is enabled
     ##
     hosts:
-    - prometheus.local.nejlikka.com
+    - prometheus.nejlikka.com
 
     path: /
 
@@ -418,7 +418,7 @@ server:
     tls:
     - secretName: prometheus-cert
       hosts:
-      - prometheus.local.nejlikka.com
+      - prometheus.nejlikka.com
 
   ## Server Deployment Strategy type
   strategy:

@@ -36,17 +36,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: www.nejlikka.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: svc-landingpage
-            port:
-              number: 80
-  - host: nejlikka.com
+  - host: aboutme.nejlikka.com
     http:
       paths:
       - path: /
@@ -58,8 +48,7 @@ spec:
               number: 80
   tls:
   - hosts:
-    - nejlikka.com
-    - www.nejlikka.com
+    - aboutme.nejlikka.com
     secretName: landingpage-cert
 
 ---

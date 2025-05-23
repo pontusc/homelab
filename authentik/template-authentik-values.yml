@@ -578,7 +578,7 @@ server:
     ingressClassName: traefik
     # -- List of ingress hosts
     hosts:
-    - authentik.local.nejlikka.com
+    - authentik.nejlikka.com
 
     # -- List of ingress paths
     paths:

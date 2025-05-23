@@ -6,9 +6,8 @@ metadata:
 spec:
   secretName: wildcard-default-cert
   dnsNames:
-    - "nejlikka.com"
-    - "*.nejlikka.com"
-    - "*.local.nejlikka.com"
+  - "nejlikka.com"
+  - "*.nejlikka.com"
   issuerRef:
     name: cloudflare-le-issuer
     kind: ClusterIssuer
