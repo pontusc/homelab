@@ -8,6 +8,9 @@ spec:
     additionalArguments:
       - "--api"
       - "--api.dashboard=true"
+    providers:
+      kubernetesCRD:
+        allowCrossNamespace: true
     ingressRoute:
       dashboard:
         enabled: true
@@ -23,6 +26,7 @@ spec:
           # gethomepage.dev/pod-selector: app.kubernetes.io/name=traefik
         entryPoints:
           - websecure
+        # middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
     ports:
       web:
         redirections:

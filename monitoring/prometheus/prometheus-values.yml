@@ -385,7 +385,7 @@ server:
     annotations:
       cert-manager.io/cluster-issuer: cloudflare-le-issuer
       traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-      traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-https@kubernetescrd
+      traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
 
     ## Prometheus server Ingress additional labels
     ##

@@ -27,7 +27,8 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: cloudflare-le-issuer
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-redirect-https@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: |
+      authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
     gethomepage.dev/description: Landing page for myself
     gethomepage.dev/name: Landing page
     gethomepage.dev/enabled: "true"
@@ -37,31 +38,31 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: www.nejlikka.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: svc-landingpage
-                port:
-                  number: 80
-    - host: nejlikka.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: svc-landingpage
-                port:
-                  number: 80
+  - host: www.nejlikka.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-landingpage
+            port:
+              number: 80
+  - host: nejlikka.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-landingpage
+            port:
+              number: 80
   tls:
-    - hosts:
-        - nejlikka.com
-        - www.nejlikka.com
-      secretName: landingpage-cert
+  - hosts:
+    - nejlikka.com
+    - www.nejlikka.com
+    secretName: landingpage-cert
 
 ---
 apiVersion: v1
@@ -71,8 +72,8 @@ metadata:
   namespace: landingpage
 spec:
   ports:
-    - port: 80
-      protocol: TCP
+  - port: 80
+    protocol: TCP
   selector:
     app: landingpage
 
@@ -93,7 +94,7 @@ spec:
         app: landingpage
     spec:
       containers:
-        - name: landingpage
-          image: pontusc/aboutme:latest
-          ports:
-            - containerPort: 80
+      - name: landingpage
+        image: pontusc/aboutme:latest
+        ports:
+        - containerPort: 80
