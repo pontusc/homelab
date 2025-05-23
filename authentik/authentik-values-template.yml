@@ -47,7 +47,7 @@ global:
   podLabels: {}
 
   # -- Add Prometheus scrape annotations to all metrics services. This can be used as an alternative to the ServiceMonitors.
-  addPrometheusAnnotations: false
+  addPrometheusAnnotations: true
 
   # -- Toggle and define pod-level security context.
   # @default -- `{}` (See [values.yaml])
@@ -527,7 +527,7 @@ server:
   ## authentik server metrics service configuration
   metrics:
     # -- deploy metrics service
-    enabled: false
+    enabled: true
     service:
       # -- metrics service type
       type: ClusterIP
