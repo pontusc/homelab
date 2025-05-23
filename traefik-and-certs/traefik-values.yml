@@ -6,8 +6,9 @@ metadata:
 spec:
   valuesContent: |-
     additionalArguments:
-      - "--api"
+      - "--api=true"
       - "--api.dashboard=true"
+      - "--api.disabledashboardad=true"
     providers:
       kubernetesCRD:
         allowCrossNamespace: true
