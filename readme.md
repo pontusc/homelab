@@ -1,6 +1,7 @@
 # Homelab setup
 Base setup is k3s default install
 Running on a single NUC, with virtualized nodes (soon).
+See [nejlikka.com](nejlikka.com)
 
 ## Components
  - Management: Rancher
