@@ -20,7 +20,7 @@ spec:
     - name: argocd-server
       port: 80
       scheme: h2c
-  tls:
-    domains:
-    - main: argocd.nejlikka.com
-    secretName: argocd-cert
+  # tls:
+  #   domains:
+  #   - main: argocd.nejlikka.com
+  #   secretName: argocd-cert
