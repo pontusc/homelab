@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: teamspeak
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: teamspeak-pvc
+  namespace: teamspeak
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 256Mi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teamspeak-deployment
+  namespace: teamspeak
+  labels:
+    app: teamspeak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teamspeak
+  template:
+    metadata:
+      namespace: teamspeak
+      labels:
+        app: teamspeak
+    spec:
+      containers:
+      - name: teamspeak-server
+        image: teamspeak:3.13.7
+        ports:
+        - name: ts
+          containerPort: 9987
+          protocol: UDP
+        resources:
+        env:
+        - name: TS3SERVER_LICENSE
+          value: accept
+        volumeMounts:
+        - mountPath: /var/ts3server/
+          name: teamspeak-data
+      volumes:
+      - name: teamspeak-data
+        persistentVolumeClaim:
+          claimName: teamspeak-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: teamspeak-service
+  namespace: teamspeak
+  labels:
+    app: teamspeak
+spec:
+  ports:
+  - port: 9987
+    targetPort: ts
+    protocol: UDP
+    name: ts
+  selector:
+    app: teamspeak
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteUDP
+metadata:
+  name: teamspeak-ingress
+  namespace: teamspeak
+spec:
+  entryPoints:
+  - teamspeak
+  routes:
+  - services:
+    - name: teamspeak-service
+      port: ts
