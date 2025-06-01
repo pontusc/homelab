@@ -9,6 +9,7 @@ spec:
       - "--api=true"
       - "--api.dashboard=true"
       - "--api.disabledashboardad=true"
+      - "--api.insecure=false"
     providers:
       kubernetesCRD:
         allowCrossNamespace: true
@@ -27,6 +28,10 @@ spec:
             to: websecure
             scheme: https
             permanent: true
+      teamspeak:
+        port: 9987
+        exposedPort: 9987
+        protocol: UDP
     tlsStore:
       default:
         defaultCertificate:
