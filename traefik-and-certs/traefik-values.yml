@@ -32,6 +32,8 @@ spec:
         port: 9987
         exposedPort: 9987
         protocol: UDP
+        expose:
+          default: true
     tlsStore:
       default:
         defaultCertificate:
