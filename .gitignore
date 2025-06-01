@@ -3,3 +3,4 @@ traefik*/certs/*.crt
 traefik*/certs/homelab-certs.yml
 traefik*/issuers/secret*
 authentik/authentik-values.yml
+ddclient.conf
