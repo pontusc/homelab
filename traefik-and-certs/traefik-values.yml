@@ -9,7 +9,7 @@ spec:
       - "--api=true"
       - "--api.dashboard=true"
       - "--api.disabledashboardad=true"
-      - "--api.insecure=false"
+      - "--api.insecure=true"
     providers:
       kubernetesCRD:
         allowCrossNamespace: true
@@ -28,6 +28,9 @@ spec:
             to: websecure
             scheme: https
             permanent: true
+      traefik:
+        expose:
+          default: true
       teamspeak:
         port: 9987
         exposedPort: 9987
