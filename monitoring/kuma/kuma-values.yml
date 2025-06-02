@@ -1,0 +1,219 @@
+# yaml-language-server: $schema=values.schema.json
+# Default values for uptime-kuma.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: louislam/uptime-kuma
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "1.23.13-debian"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+# -- A custom namespace to override the default namespace for the deployed resources.
+namespaceOverride: ""
+
+# If this option is set to false a StateFulset instead of a Deployment is used
+useDeploy: true
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+# app: uptime-kuma
+podEnv: []
+# optional additional environment variables
+# - name: "A_VARIABLE"
+#   value: "a-value"
+
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext: {}
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 3001
+  nodePort:
+  annotations: {}
+
+ingress:
+  enabled: true
+  className: traefik
+  extraLabels: {}
+  # vhost: uptime-kuma.company.corp
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+  hosts:
+  - host: kuma.nejlikka.com
+    paths:
+    - path: /
+      pathType: Prefix
+
+  tls: []
+  # - secretName: chart-example-tls
+  #   hosts:
+  #     - chart-example.local
+
+resources: {}
+# We usually recommend not to specify default resources and to leave this as a conscious
+# choice for the user. This also increases chances charts run on environments with little
+# resources, such as Minikube. If you do want to specify resources, uncomment the following
+# lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+# limits:
+#   cpu: 100m
+#   memory: 128Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+livenessProbe:
+  enabled: true
+  failureThreshold: 3
+  # Uptime-Kuma recommends to configure a delay of 180 seconds until the server fully started.
+  # https://github.com/louislam/uptime-kuma/blob/ae224f9e188b1fc32ed8729818710975589cdce7/extra/healthcheck.go#L3
+  initialDelaySeconds: 180
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 2
+  # The NodeJS Version of this Healthcheck is no longer supported, therefore we don't specify a node command.
+  # https://github.com/louislam/uptime-kuma/blob/ae224f9e188b1fc32ed8729818710975589cdce7/extra/healthcheck.js#L6
+  exec:
+    command:
+    - "extra/healthcheck"
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 1
+  failureThreshold: 3
+  successThreshold: 1
+  exec:
+    command: []
+  httpGet:
+    path: /
+    port: 3001
+    scheme: HTTP
+    httpHeaders: []
+
+volume:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 4Gi
+  # If you want to use a storage class other than the default, uncomment this
+  # line and define the storage class name
+  storageClassName: longhorn
+  # Reuse your own pre-existing PVC.
+  existingClaim: ""
+
+# -- A list of additional volumes to be added to the pod
+additionalVolumes: []
+# - name: "additional-certificates"
+#   configMap:
+#     name: "additional-certificates"
+#     optional: true
+#     defaultMode: 420
+
+# -- A list of additional volumeMounts to be added to the pod
+additionalVolumeMounts: []
+# - name: "additional-certificates"
+#   mountPath: "/etc/ssl/certs/additional/additional-ca.pem"
+#   readOnly: true
+#   subPath: "additional-ca.pem"
+
+strategy:
+  type: Recreate
+
+# Mariadb configurations
+mariadb:
+  enabled: false
+  architecture: standalone
+  auth:
+    database: uptime_kuma
+    username: uptime_kuma
+    password: ""
+    rootPassword: ""
+
+# Prometheus ServiceMonitor configuration
+serviceMonitor:
+  enabled: false
+  # -- Scrape interval. If not set, the Prometheus default scrape interval is used.
+  interval: 60s
+  # -- Timeout if metrics can't be retrieved in given time interval
+  scrapeTimeout: 10s
+  # -- Scheme to use when scraping, e.g. http (default) or https.
+  scheme: ~
+  # -- TLS configuration to use when scraping, only applicable for scheme https.
+  tlsConfig: {}
+  # -- Prometheus [RelabelConfigs] to apply to samples before scraping
+  relabelings: []
+  # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
+  metricRelabelings: []
+  # -- Prometheus ServiceMonitor selector, only select Prometheus's with these
+  # labels (if not set, select any Prometheus)
+  selector: {}
+
+  # -- Namespace where the ServiceMonitor resource should be created, default is
+  # the same as the release namespace
+  namespace: ~
+  # -- Additional labels to add to the ServiceMonitor
+  additionalLabels: {}
+  # -- Additional annotations to add to the ServiceMonitor
+  annotations: {}
+
+  # -- BasicAuth credentials for scraping metrics, use API token and any string for username
+  # basicAuth:
+  #   username: "metrics"
+  #   password: ""
+
+# -- Use this option to set a custom DNS policy to the created deployment
+dnsPolicy: ""
+
+# -- Use this option to set custom DNS configurations to the created deployment
+dnsConfig: {}
+
+# -- Use this option to set custom PriorityClass to the created deployment
+# ref: https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass
+priorityClassName: ""
+
+# -- Create a NetworkPolicy
+networkPolicy:
+  # -- Enable/disable Network Policy
+  enabled: false
+  # -- Enable/disable Ingress policy type
+  ingress: true
+  # -- Enable/disable Egress policy type
+  egress: true
+  # -- Allow incoming connections only from specific Pods
+  # When set to true, the geoserver will accept connections from any source.
+  # When false, only Pods with the label {{ include "geoserver.fullname" . }}-client=true will have network access
+  allowExternal: true
+  # -- Selects particular namespaces for which all Pods are allowed as ingress sources
+  namespaceSelector: {}
+  #  matchLabels:
+  #    role: frontend
+  #  matchExpressions:
+  #   - {key: role, operator: In, values: [frontend]}
+

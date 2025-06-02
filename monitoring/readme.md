@@ -9,3 +9,7 @@ Username is admin, to get login run ```kubectl get secret --namespace monitoring
 ## Prometheus
 Install using ```helm install prometheus prometheus-community/prometheus -n monitoring --values prometheus-values.yml```\
 Update using the values file, run ```helm upgrade -n monitoring prometheus prometheus-community/prometheus -f prometheus-values.yml```
+
+## Uptimekuma
+Install using ```helm install -n monitoring uptime-kuma uptime-kuma/uptime-kuma -f kuma-values.yml```
+Update using ```helm upgrade -n monitoring uptime-kuma uptime-kuma/uptime-kuma -f kuma-values.yml```
