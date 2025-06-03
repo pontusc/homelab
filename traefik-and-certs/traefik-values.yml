@@ -22,7 +22,10 @@ spec:
         middlewares:
           - name: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
     ports:
+      websecure:
+        port: 443
       web:
+        port: 80
         redirections:
           entryPoint:
             to: websecure
