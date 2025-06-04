@@ -3,7 +3,6 @@ kind: Ingress
 metadata:
   name: aboutme
   annotations:
-    cert-manager.io/cluster-issuer: cloudflare-le-issuer
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     gethomepage.dev/description: CV/Info
     gethomepage.dev/name: About me
@@ -21,7 +20,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: svc-aboutme
+            name: aboutme
             port:
               number: 80
 
@@ -29,7 +28,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-aboutme
+  name: aboutme
 spec:
   ports:
   - port: 80
