@@ -5,8 +5,8 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: cloudflare-le-issuer
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    gethomepage.dev/description: Aboutme deployment for CV/Info
-    gethomepage.dev/name: Aboutme page
+    gethomepage.dev/description: CV/Info
+    gethomepage.dev/name: About me
     gethomepage.dev/enabled: "true"
     gethomepage.dev/group: Deployments
     gethomepage.dev/icon: nginx.png
