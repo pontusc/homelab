@@ -1,38 +1,16 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: landingpage
-
-# ---
-# apiVersion: cert-manager.io/v1
-# kind: Certificate
-# metadata:
-#   name: landingpage-cert
-#   namespace: landingpage
-# spec:
-#   secretName: landingpage-tls-secret
-#   issuerRef:
-#     name: selfsigned-issuer
-#     kind: ClusterIssuer
-#   dnsNames:
-#     - nejlikka.com
-#       www.nejlikka.com
-#
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: landingpage
-  namespace: landingpage
+  name: aboutme
   annotations:
     cert-manager.io/cluster-issuer: cloudflare-le-issuer
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    gethomepage.dev/description: Landing page for myself
-    gethomepage.dev/name: Landing page
+    gethomepage.dev/description: Aboutme deployment for CV/Info
+    gethomepage.dev/name: Aboutme page
     gethomepage.dev/enabled: "true"
     gethomepage.dev/group: Deployments
     gethomepage.dev/icon: nginx.png
-    gethomepage.dev/pod-selector: app=landingpage
+    gethomepage.dev/pod-selector: app=aboutme
 spec:
   ingressClassName: traefik
   rules:
@@ -43,45 +21,39 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: svc-landingpage
+            name: svc-aboutme
             port:
               number: 80
-  tls:
-  - hosts:
-    - aboutme.nejlikka.com
-    secretName: landingpage-cert
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-landingpage
-  namespace: landingpage
+  name: svc-aboutme
 spec:
   ports:
   - port: 80
     protocol: TCP
   selector:
-    app: landingpage
+    app: aboutme
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: landingpage
-  namespace: landingpage
+  name: aboutme
 spec:
   selector:
     matchLabels:
-      app: landingpage
+      app: aboutme
   replicas: 1
   template:
     metadata:
       labels:
-        app: landingpage
+        app: aboutme
     spec:
       containers:
-      - name: landingpage
+      - name: aboutme
         image: pontusc/aboutme:latest
         ports:
         - containerPort: 80
