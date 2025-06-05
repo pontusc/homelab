@@ -180,3 +180,4 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: homepage-config
+  namespace: homepage
