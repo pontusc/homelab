@@ -102,6 +102,11 @@ metadata:
     app.kubernetes.io/name: homepage
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    gethomepage.dev/name: Homepage
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/group: Deployments
+    gethomepage.dev/icon: nginx.png
+    gethomepage.dev/pod-selector: app=homepage
 spec:
   ingressClassName: traefik
   rules:
