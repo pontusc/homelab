@@ -1,7 +1,0 @@
-apiVersion: v1
-data:
-  custom.js: ""
-kind: ConfigMap
-metadata:
-  creationTimestamp: null
-  name: custom
