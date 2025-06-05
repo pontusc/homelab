@@ -134,6 +134,7 @@ data:
         style: row
         columns: 2
       Deployments:
+        useEqualHeights: true
         style: row
         columns: 4
       Repositories:

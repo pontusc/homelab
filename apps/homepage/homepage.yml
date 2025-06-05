@@ -106,7 +106,7 @@ metadata:
     gethomepage.dev/enabled: "true"
     gethomepage.dev/group: Deployments
     gethomepage.dev/icon: nginx.png
-    gethomepage.dev/pod-selector: app=homepage
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=homepage
 spec:
   ingressClassName: traefik
   rules:
