@@ -205,9 +205,9 @@ spec:
           subPath: widgets.yaml
         - mountPath: /app/config/logs
           name: logs
-    volumes:
-    - name: homepage-config
-      configMap:
-        name: homepage-config
-    - name: logs
-      emptyDir: {}
+      volumes:
+      - name: homepage-config
+        configMap:
+          name: homepage-config
+      - name: logs
+        emptyDir: {}
