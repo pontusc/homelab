@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  docker.yaml: ""
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: docker

@@ -1,0 +1,30 @@
+apiVersion: v1
+data:
+  settings.yaml: |
+    description: Homelab
+    title: Homelab
+    background: https://w.wallhaven.cc/full/d6/wallhaven-d6j79o.png
+    statusStyle: "dot"
+    cardBlur: md
+    theme: dark
+    language: en
+    disableCollapse: true
+    color: slate
+
+    layout:
+      Cluster Management:
+        icon: kubernetes.png
+        useEqualHeights: true
+        style: row
+        columns: 2
+      Deployments:
+        style: row
+        columns: 4
+      Repositories:
+        style: row
+        columns: 6
+        useEqualHeights: true
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: settings

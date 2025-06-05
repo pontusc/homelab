@@ -1,0 +1,43 @@
+apiVersion: v1
+data:
+  bookmarks.yaml: |
+    - Repositories:
+      - GitHub:
+        - abbr: GH
+          icon: github.png
+          href: https://github.com/pontusc
+          description: Profile
+
+      - Homelab:
+        - abbr: HL
+          icon: github.png
+          href: https://github.com/pontusc/homelab
+          description: Config
+
+      - Homepage:
+        - abbr: HP
+          icon: github.png
+          href: https://github.com/pontusc/homepage
+          description: Config
+
+      - Dotfiles:
+        - abbr: DF
+          icon: github.png
+          href: https://github.com/pontusc/.dotfiles
+          description: Config
+
+      - Neovim:
+        - abbr: NVim
+          icon: github.png
+          href: https://github.com/pontusc/nvim
+          description: Config
+
+      - Rekurrens:
+        - abbr: GL
+          icon: gitlab.png
+          href: https://git.chasacademy.dev/chas-challenge-2025/group-12/rekurrens
+          description: CC
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: bookmarks
