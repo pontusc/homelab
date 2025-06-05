@@ -4,7 +4,6 @@ metadata:
   name: aboutme
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    gethomepage.dev/description: CV/Info
     gethomepage.dev/name: About me
     gethomepage.dev/enabled: "true"
     gethomepage.dev/group: Deployments
