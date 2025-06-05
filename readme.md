@@ -11,10 +11,11 @@ See [nejlikka.com](https://nejlikka.com).
  - CNI: flannel
  - Monitoring: Grafana stack (loki TBA)
  - GitOps: ArgoCD
+ - Secrets: Sealed-secrets
 
-## Services
+## Deployments
  - [Homepage](https://github.com/pontusc/homepage)
- - Emby (TODO)
+ - [Aboutme](https://github.com/pontusc/aboutme)
 
 ## TODO
 Current structure is k3s hosted on a single node. Will change for k3s to run on 1 manager node and 2 worker nodes, which will be running on 3 vm's to simulate a "real" environment. 
