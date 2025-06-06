@@ -82,7 +82,7 @@ data:
           widget:
             type: grafana
             url: http://grafana.monitoring.svc.cluster.local:80
-            username: "admin"
+            username: admin
             password: "{{HOMEPAGE_VAR_GRAFANA_PASSWORD}}"
 
       - Authentik:
