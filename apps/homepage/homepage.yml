@@ -154,6 +154,9 @@ spec:
         - name: HOMEPAGE_ALLOWED_HOSTS
           value: nejlikka.com # required, may need port
 
+        - name: HOMEPAGE_PROXY_DISABLE_IPV6
+          value: true
+
         - name: HOMEPAGE_VAR_ARGO_API_KEY
           valueFrom:
             secretKeyRef:
