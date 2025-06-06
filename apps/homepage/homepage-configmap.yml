@@ -76,13 +76,13 @@ data:
 
       - Grafana:
           href: https://grafana.nejlikka.com
-          siteMonitor: http://grafana.monitoring.svc.cluster.local
+          siteMonitor: http://grafana.monitoring.svc.cluster.local:80
           icon: grafana.png
           description: Reports & Alerts
           widget:
             type: grafana
-            url: http://grafana.monitoring.svc.cluster.local
-            username: admin
+            url: http://grafana.monitoring.svc.cluster.local:80
+            username: "admin"
             password: "{{HOMEPAGE_VAR_GRAFANA_PASSWORD}}"
 
       - Authentik:
