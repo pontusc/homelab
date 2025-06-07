@@ -89,10 +89,11 @@ metadata:
   name: teamspeak-filetransfer
   namespace: teamspeak
 spec:
-  entrypoints:
+  entryPoints:
   - ts-filetransfer
   routes:
-  - match: HostSNI(`ts.nejlikka.com`)
+  - match: HostSNI(`*`)
+    # - match: HostSNI(`ts.nejlikka.com`)
     services:
     - name: teamspeak-service
       port: file-transfer
@@ -104,10 +105,11 @@ metadata:
   name: teamspeak-serverquery
   namespace: teamspeak
 spec:
-  entrypoints:
+  entryPoints:
   - ts-serverquery
   routes:
-  - match: HostSNI(`ts.nejlikka.com`)
+  - match: HostSNI(`*`)
+    # - match: HostSNI(`ts.nejlikka.com`)
     services:
     - name: teamspeak-service
       port: server-query
@@ -120,8 +122,8 @@ metadata:
   namespace: teamspeak
 spec:
   entryPoints:
-  - teamspeak
+  - ts-voice
   routes:
   - services:
     - name: teamspeak-service
-      port: ts
+      port: voice
