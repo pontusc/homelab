@@ -45,6 +45,9 @@ spec:
     matchLabels:
       app: aboutme
   replicas: 3
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -55,3 +58,19 @@ spec:
         image: pontusc/aboutme:1749320221
         ports:
         - containerPort: 80
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "0.1"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 20
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 20
