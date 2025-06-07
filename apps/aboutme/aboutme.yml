@@ -52,6 +52,6 @@ spec:
     spec:
       containers:
       - name: aboutme
-        image: pontusc/aboutme:1749222451
+        image: pontusc/aboutme:1749290583
         ports:
         - containerPort: 80
