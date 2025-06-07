@@ -34,10 +34,22 @@ spec:
       traefik:
         expose:
           default: true
-      teamspeak:
+      ts-voice:
         port: 9987
         exposedPort: 9987
         protocol: UDP
+        expose:
+          default: true
+      ts-filetransfer:
+        port: 30033
+        exposedPort: 30033
+        protocol: TCP
+        expose:
+          default: true
+      ts-serverquery:
+        port: 10011
+        exposedPort: 10011
+        protocol: TCP
         expose:
           default: true
     tlsStore:
