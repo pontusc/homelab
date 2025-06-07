@@ -119,7 +119,7 @@ data:
   settings.yaml: |
     description: Homelab for personal use as a learning project
     title: Pontus Homelab
-    favicon: https://cdn-icons-png.flaticon.com/512/1468/1468674.png
+    favicon: https://img.icons8.com/?size=100&id=1340&format=png&color=000000
     background: https://w.wallhaven.cc/full/d6/wallhaven-d6j79o.png
     statusStyle: "dot"
     cardBlur: md
