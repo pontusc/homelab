@@ -127,6 +127,8 @@ kind: Deployment
 metadata:
   name: homepage
   namespace: homepage
+  annotations:
+    reloader.stakater.com/auto: "true"
   labels:
     app.kubernetes.io/name: homepage
 spec:
