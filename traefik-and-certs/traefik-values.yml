@@ -59,6 +59,3 @@ spec:
     logs:
       access:
         enabled: true
-    service:
-      spec:
-        externalTrafficPolicy: Local
