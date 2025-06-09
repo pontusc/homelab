@@ -1,5 +1,5 @@
 # Incus
-Uses incus for virtualized nodes. Running one controlnode and two worker nodes with Ubuntu22.04 LTS.
+Uses incus for virtualized nodes. Running one control node and two worker nodes with Ubuntu 22.04 LTS.
 
 ## Setup
 Run:
