@@ -149,7 +149,7 @@ data:
   widgets.yaml: |
     - kubernetes:
         cluster:
-          show: true
+          show: false
           cpu: true
           memory: true
           showLabel: true
@@ -167,11 +167,11 @@ data:
     #     memory: true
     #     uptime: true
     #     network: false
-    - longhorn:
-        expanded: true
-        total: true
-        labels: true
-        nodes: true
+    # - longhorn:
+    #     expanded: true
+    #     total: true
+    #     labels: true
+    #     nodes: true
 
     - openmeteo:
         label: Stockholm # optional
