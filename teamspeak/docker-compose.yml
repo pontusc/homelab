@@ -1,0 +1,39 @@
+services:
+  teamspeak:
+    image: teamspeak
+    restart: always
+    ports:
+    - 0.0.0.0:9987:9987/udp
+    - 0.0.0.0:10011:10011
+    - 0.0.0.0:30033:30033
+    environment:
+      TS3SERVER_DB_PLUGIN: ts3db_mariadb
+      TS3SERVER_DB_SQLCREATEPATH: create_mariadb
+      TS3SERVER_DB_HOST: db
+      TS3SERVER_DB_USER: root
+      TS3SERVER_DB_PASSWORD: example
+      TS3SERVER_DB_NAME: teamspeak
+      TS3SERVER_DB_WAITUNTILREADY: 30
+      TS3SERVER_LICENSE: accept
+    depends_on:
+    - db
+    networks:
+    - teamspeak-net
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: teamspeak
+    volumes:
+    - teamspeak-db:/var/lib/mysql
+    networks:
+    - teamspeak-net
+
+networks:
+  teamspeak-net:
+    driver: bridge
+
+volumes:
+  teamspeak-db:

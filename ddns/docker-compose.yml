@@ -7,5 +7,5 @@ services:
     - PGID=1000
     - TZ=Europe/Stockholm
     volumes:
-    - /home/pontusc/homelab/ddns/config:/config
+    - /home/pontusc/homelab/ddns/config:/etc/ddclient/
     restart: unless-stopped
