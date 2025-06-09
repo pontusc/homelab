@@ -2,6 +2,7 @@ services:
   teamspeak:
     image: teamspeak
     restart: always
+    network_mode: host
     ports:
     - 0.0.0.0:9987:9987/udp
     - 0.0.0.0:10011:10011
@@ -17,8 +18,6 @@ services:
       TS3SERVER_LICENSE: accept
     depends_on:
     - db
-    networks:
-    - teamspeak-net
 
   db:
     image: mariadb
@@ -28,12 +27,6 @@ services:
       MYSQL_DATABASE: teamspeak
     volumes:
     - teamspeak-db:/var/lib/mysql
-    networks:
-    - teamspeak-net
-
-networks:
-  teamspeak-net:
-    driver: bridge
 
 volumes:
   teamspeak-db:
