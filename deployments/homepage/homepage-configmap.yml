@@ -12,25 +12,25 @@ data:
         - abbr: HL
           icon: github.png
           href: https://github.com/pontusc/homelab
-          description: Config
+          description: Homelab
 
       - Homepage:
         - abbr: HP
           icon: github.png
           href: https://github.com/pontusc/homepage
-          description: Config
+          description: Homepage
 
       - Dotfiles:
         - abbr: DF
           icon: github.png
           href: https://github.com/pontusc/.dotfiles
-          description: Config
+          description: dotfiles
 
       - Neovim:
         - abbr: NVim
           icon: github.png
           href: https://github.com/pontusc/nvim
-          description: Config
+          description: Neovim conf
 
       - Rekurrens:
         - abbr: GL
