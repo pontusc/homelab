@@ -58,7 +58,7 @@ ingress:
   extraLabels: {}
   # vhost: uptime-kuma.company.corp
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
   hosts:
   - host: kuma.nejlikka.com
     paths:
