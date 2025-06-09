@@ -34,7 +34,7 @@ spec:
       traefik:
         expose:
           default: true
-      ts-voice:Add commentMore actions
+      ts-voice:
         port: 9987
         exposedPort: 9987
         protocol: UDP
