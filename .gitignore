@@ -3,5 +3,6 @@ traefik*/certs/*.crt
 traefik*/certs/homelab-certs.yml
 traefik*/issuers/secret*
 traefik*/issuers/api-token-cloudflare.yml
+monitoring/grafana/grafana-admin.yml
 authentik/authentik-values.yml
 ddclient.conf
