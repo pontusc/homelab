@@ -1,4 +1,4 @@
 # Longhorn
-Default install with changed values for replicas. Will change back when emulating a more HA environment.
+Installed using ```helm install longhorn longhorn/longhorn -n longhorn-system --create-namespace --values values.yaml```
 
 Make sure open-iscsi is installed (services iscsid and open-iscsi need to be enabled and started)

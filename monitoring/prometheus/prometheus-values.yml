@@ -384,8 +384,8 @@ server:
     ##
     annotations:
       cert-manager.io/cluster-issuer: cloudflare-le-issuer
-      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-      traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.middlewares: authentik-forward-auth@kubernetescrd
 
     ## Prometheus server Ingress additional labels
     ##
@@ -1268,7 +1268,7 @@ extraManifests: []
 alertmanager:
   ## If false, alertmanager will not be installed
   ##
-  enabled: true
+  enabled: false
 
   persistence:
     size: 2Gi
