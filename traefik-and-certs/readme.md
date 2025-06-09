@@ -12,6 +12,11 @@ Traefik configured in traefik-values.yml\
 Middleware configured in middleware-traefik.yml\
 Certs stored under certs/
 
+## Cert-manager install
+Run ```kubectl apply -f cert-manager.yml```\
+After that, add the cloudflare secret, and the cloudflare-le-issuer.\
+Once complete, add the wildcard-default-cert and inspect them to make sure they managed to be issued
+
 ## Cert-manager config
 Two ClusterIssuers configured.
  - selfsigned-clusterissuer uses selfmade certficate, not in use.

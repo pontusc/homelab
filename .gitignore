@@ -2,5 +2,6 @@ traefik*/certs/*.key
 traefik*/certs/*.crt
 traefik*/certs/homelab-certs.yml
 traefik*/issuers/secret*
+traefik*/issuers/api-token-cloudflare.yml
 authentik/authentik-values.yml
 ddclient.conf

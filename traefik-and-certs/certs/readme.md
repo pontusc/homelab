@@ -1,13 +1,14 @@
 # Certificates 
-Info about self-signed certs, and wildcard cert
+Info about self-signed certs, and wildcard cert.
 
-#Information about my self-signed certs
+Wildcard cert is populated using cert-manager and cloudflare dns0 challenge.
 
-## Gen base key
-openssl genrsa -out <KEYNAME.key> 4096
+# Information about my self-signed certs -- BELOW IS NOT IN USE
+Gen base key
+```openssl genrsa -out <KEYNAME.key> 4096```
 
-## Gen cert
-openssl req -new -x509 -sha256 -days 10950 -key <KEYNAME.key> -out <CERTNAME.crt> -utf8
+Gen cert
+```openssl req -new -x509 -sha256 -days 10950 -key <KEYNAME.key> -out <CERTNAME.crt> -utf8```
 
-## Base64 encode cert and key, paste into the cert-secret-template
-cat <CERTNAME.crt> | base64 -w 0
+Base64 encode cert and key, paste into the cert-secret-template
+```cat <CERTNAME.crt> | base64 -w 0```

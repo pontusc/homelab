@@ -18,6 +18,10 @@ network:
       routes:
         - to: default
           via: 192.168.1.1
+      nameservers:
+        addresses:
+          - 1.1.1.1
+          - 192.168.1.1
       dhcp-identifier: mac
 ```
 
