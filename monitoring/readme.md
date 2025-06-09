@@ -2,8 +2,10 @@
 Grafana & prometheus deployed under namespace monitoring
 
 ## Grafana
-Install using ```helm repo add grafana https://grafana.github.io/helm-charts```\
+Install using ```helm install -n monitoring grafana grafana/grafana -f grafana-values.yml```\
 Update using the grafana-values.yml file, run ```helm upgrade -n monitoring grafana grafana/grafana -f grafana-values.yml```\
+\
+OLD - New credentials stored using sealed-secret\
 Username is admin, to get login run ```kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo```\
 
 ## Prometheus
