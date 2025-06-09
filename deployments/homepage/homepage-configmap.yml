@@ -142,6 +142,10 @@ data:
         style: row
         columns: 6
         useEqualHeights: true
+
+    providers:
+      longhorn:
+        url: http://longhorn-frontend.longhorn-system.svc.cluster.local
   widgets.yaml: |
     - kubernetes:
         cluster:
@@ -163,11 +167,11 @@ data:
     #     memory: true
     #     uptime: true
     #     network: false
-    # - longhorn:
-    #     expanded: true
-    #     total: true
-    #     labels: true
-    #     nodes: false
+    - longhorn:
+        expanded: true
+        total: true
+        labels: true
+        nodes: true
 
     - openmeteo:
         label: Stockholm # optional
