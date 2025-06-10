@@ -132,6 +132,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
     gethomepage.dev/name: Homepage
+    gethomepage.dev/href: "https://nejlikka.com"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/group: Deployments
     gethomepage.dev/icon: nginx.png
