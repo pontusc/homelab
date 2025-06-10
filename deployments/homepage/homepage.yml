@@ -92,9 +92,38 @@ spec:
   selector:
     app.kubernetes.io/name: homepage
 
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: homepage
+#   namespace: homepage
+#   labels:
+#     app.kubernetes.io/name: homepage
+#   annotations:
+#     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+#     gethomepage.dev/name: Homepage
+#     gethomepage.dev/enabled: "true"
+#     gethomepage.dev/group: Deployments
+#     gethomepage.dev/icon: nginx.png
+#     gethomepage.dev/pod-selector: app.kubernetes.io/name=homepage
+# spec:
+#   ingressClassName: traefik
+#   rules:
+#   - host: nejlikka.com
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: homepage
+#             port:
+#               number: 3000
+
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
   name: homepage
   namespace: homepage
@@ -108,18 +137,20 @@ metadata:
     gethomepage.dev/icon: nginx.png
     gethomepage.dev/pod-selector: app.kubernetes.io/name=homepage
 spec:
-  ingressClassName: traefik
-  rules:
-  - host: nejlikka.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: homepage
-            port:
-              number: 3000
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`nejlikka.com`)
+    services:
+    - kind: Service
+      name: homepage
+      port: 3000
+      sticky:
+        cookie:
+          httpOnly: true
+          secure: true
+          sameSite: none
 
 ---
 apiVersion: apps/v1
@@ -133,7 +164,7 @@ metadata:
     app.kubernetes.io/name: homepage
 spec:
   revisionHistoryLimit: 3
-  replicas: 1
+  replicas: 2
   strategy:
     type: RollingUpdate
   selector:
