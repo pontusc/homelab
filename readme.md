@@ -1,7 +1,7 @@
 # Homelab setup
 
 Base setup is k3s default install.\
-Running on a single NUC, with virtualized nodes (soon).\
+Running on a single NUC, with virtualized nodes.\
 See [nejlikka.com](https://nejlikka.com).
 
 ## Core components
