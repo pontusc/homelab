@@ -88,7 +88,7 @@ name: k3s-worker
 
 Stuff I have had to change manually after deploying, that should be included in cloud-init or some other way.
 
-- Dependencies for Longhorn
+- Dependencies for Longhorn\
   Open-iscsi (services iscsid and open-iscsi need to be enabled and started)
-- File descriptor limit
-  Default seems to be 1024, and that is not enough when running Loki. See topic under [monitoring](/monitoring).
+- File descriptor limit\
+  Default seems to be 1024, and that is not enough when running Loki. See topic under [monitoring](/monitoring) and Loki error.
