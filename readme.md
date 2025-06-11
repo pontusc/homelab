@@ -6,12 +6,12 @@ See [nejlikka.com](https://nejlikka.com).
 
 ## Core components
 
-- Kubernetes: [K3s](https://docs.k3s.io)
+- Kubernetes: [K3S](https://docs.k3s.io)
 - Management: [Rancher](https://github.com/rancher/rancher)
-- Ingress: [traefik](https://github.com/traefik/traefik/)
-- Certs: [cert-manager](https://github.com/cert-manager/cert-manager)
-- CSI: [longhorn](https://github.com/longhorn/longhorn)
-- CNI: [flannel](https://github.com/flannel-io/flannel)
+- Ingress: [Traefik](https://github.com/traefik/traefik/)
+- Certs: [Cert-manager](https://github.com/cert-manager/cert-manager)
+- CSI: [Longhorn](https://github.com/longhorn/longhorn)
+- CNI: [Flannel](https://github.com/flannel-io/flannel)
 - Monitoring: [Grafana](https://github.com/grafana/grafana)
 - TSDB: [Prometheus](https://github.com/prometheus/prometheus)
 - LogDB: [Loki](https://github.com/grafana/loki)
