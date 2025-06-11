@@ -16,6 +16,12 @@ loki:
   limits_config:
     allow_structured_metadata: true
     volume_enabled: true
+    retention_period: 7d
+  compactor:
+    delete_request_store: s3
+    compaction_interval: 10m
+    retention_enabled: true
+    retention_delete_delay: 2h
   ruler:
     enable_api: true
 
@@ -27,9 +33,11 @@ deploymentMode: SingleBinary
 singleBinary:
   replicas: 1
 
-# Disable loki-chunks-0 pods that consume a lot of memory
+# Change cache memory allowance from 8GB to 256MB
 chunksCache:
   allocatedMemory: 256
+
+# Configure retention of logs
 
 # Zero out replica counts of other deployment modes
 backend:
