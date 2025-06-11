@@ -5,3 +5,7 @@ Installed using `helm install longhorn longhorn/longhorn -n longhorn-system --cr
 ## Node requirements
 
 Open-iscsi (services iscsid and open-iscsi need to be enabled and started)
+
+## Missing CRDs
+
+If you receive log errors regarding voluemsnapshotclasses... missing, see [this](https://longhorn.io/docs/archives/1.1.1/snapshots-and-backups/csi-snapshot-support/enable-csi-snapshot-support/). Install CRD's from [here](https://github.com/kubernetes-csi/external-snapshotter).

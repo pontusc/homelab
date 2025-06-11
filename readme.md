@@ -27,6 +27,8 @@ See [nejlikka.com](https://nejlikka.com).
 
 ## K3S Configurations
 
+If you only want certain nodes to have the load balancer, label one or more with `vccontroller.k3s.cattle.io/enablelb=true`
+
 Change the default storageclass provided by K3S to not be default. Run below or edit yourself on control node.
 
 ```bash
