@@ -1,13 +1,17 @@
 # Incus
+
 Uses incus for virtualized nodes. Running one control node and two worker nodes with Ubuntu 22.04 LTS.
 
 ## Setup
+
 Run:
- - ```incus launch images:ubuntu/22.04 control-1 --profile k3s-control --vm```
- - ```incus launch images:ubuntu/22.04 worker-X --profile k3s-worker --vm```
+
+- `incus launch images:ubuntu/22.04 control-1 --profile k3s-control --vm`
+- `incus launch images:ubuntu/22.04 worker-X --profile k3s-worker --vm`
 
 Edit the netplan configs of all images to follow this structure:
-```
+
+```yaml
 network:
   version: 2
   ethernets:
@@ -26,12 +30,15 @@ network:
 ```
 
 Install K3S following their documentation, grab the token and install on both agents.
+This can and should be automated using Ansible, will explore that tool later when I need to automate VM management.
 
 ## Profiles
+
 Incus profiles used
 
 ### Control node
-```
+
+```yaml
 config:
   boot.autostart: "true"
   boot.autostart.priority: "10"
@@ -54,7 +61,8 @@ name: k3s-control
 ```
 
 ### Worker node
-```
+
+```yaml
 config:
   boot.autostart: "true"
   boot.autostart.priority: "5"
