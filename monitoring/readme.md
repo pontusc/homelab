@@ -19,6 +19,10 @@ Update using the values file, run `helm upgrade -n monitoring prometheus prometh
 
 Install using `helm install loki grafana/loki -n monitoring -f loki-values.yml`
 
+### Loki "too many open file" error
+
+See [this topic](https://askubuntu.com/questions/162229/how-do-i-increase-the-open-files-limit-for-a-non-root-user/162230#162230). You have to configure the node to allow whatever number of file descriptors you want. Can check on nodes with `ulimit -n`
+
 ## Alloy
 
 Install using `helm install alloy grafana/alloy -n monitoring -f alloy-values.yml`
