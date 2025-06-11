@@ -30,9 +30,7 @@ See [nejlikka.com](https://nejlikka.com).
 Change the default storageclass provided by K3S to not be default. Run below or edit yourself on control node.
 
 ```bash
-sudo cp /var/lib/rancher/k3s/server/manifests/local-storage.yaml /var/lib/rancher/k3s/server/manifests/custom-local-storage.yaml
-
-sudo sed -i -e "s/storageclass.kubernetes.io\/is-default-class: \"true\"/storageclass.kubernetes.io\/is-default-class: \"false\"/g" /var/lib/rancher/k3s/server/manifests/custom-local-storage.yaml
+sudo sed -i -e "s/storageclass.kubernetes.io\/is-default-class: \"true\"/storageclass.kubernetes.io\/is-default-class: \"false\"/g" /var/lib/rancher/k3s/server/manifests/local-storage.yml
 ```
 
-This can be pre-configured when installing K3S, if you already know you are going to use longhorn.
+This can be pre-configured when installing K3S, if you already know you are going to use longhorn. I think changing the file directly should work, but K3S might repopulate this file n restart of server based on some other behaviour, so double-check.
