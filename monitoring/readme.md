@@ -19,6 +19,10 @@ Update using the values file, run `helm upgrade -n monitoring prometheus prometh
 
 Install using `helm install loki grafana/loki -n monitoring -f loki-values.yml`
 
+## Alloy
+
+Install using `helm install alloy grafana/alloy -n monitoring -f alloy-values.yml`
+
 ## Uptimekuma
 
 Install using `helm install -n monitoring uptime-kuma uptime-kuma/uptime-kuma -f kuma-values.yml`
