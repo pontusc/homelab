@@ -57,12 +57,12 @@ data:
 
       - Prometheus:
           href: https://prometheus.nejlikka.com
-          siteMonitor: http://prometheus-server.monitoring.svc.cluster.local
+          siteMonitor: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
           icon: prometheus.png
-          description: Cluster logs
+          description: Metrics
           widget:
             type: prometheus
-            url: http://prometheus-server.monitoring.svc.cluster.local
+            url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
 
       - ArgoCD:
           href: https://argocd.nejlikka.com
@@ -76,12 +76,12 @@ data:
 
       - Grafana:
           href: https://grafana.nejlikka.com
-          siteMonitor: http://grafana.monitoring.svc.cluster.local:80
+          siteMonitor: http://kube-prometheus-stack-grafana.monitoring.svc.cluster.local:80
           icon: grafana.png
           description: Reports & Alerts
           widget:
             type: grafana
-            url: http://grafana.monitoring.svc.cluster.local:80
+            url: http://kube-prometheus-stack-grafana.monitoring.svc.cluster.local:80
             username: admin
             password: {{HOMEPAGE_VAR_GRAFANA_PASSWORD}}
 
