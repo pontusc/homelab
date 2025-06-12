@@ -2,18 +2,19 @@
 
 Grafana & prometheus deployed under namespace monitoring
 
+## Kube-prometheus-stack
+
+Install using `helm install -n monitoring kube-prometheus-stack prometheus-community/kube-prometheus-stack -f stack-values.yml`.
+
+Installs Grafana, Prometheus, Prometheus-Operator and some more, see [this](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack).
+
 ## Grafana
 
-Install using `helm install -n monitoring grafana grafana/grafana -f grafana-values.yml`\
-Update using the grafana-values.yml file, run `helm upgrade -n monitoring grafana grafana/grafana -f grafana-values.yml`\
-\
-OLD - New credentials stored using sealed-secret\
-Username is admin, to get login run `kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo`\
+Migrated to Kube-prometheus-stack
 
 ## Prometheus
 
-Install using `helm install prometheus prometheus-community/prometheus -n monitoring --values prometheus-values.yml`\
-Update using the values file, run `helm upgrade -n monitoring prometheus prometheus-community/prometheus -f prometheus-values.yml`
+Migrated to Kube-prometheus-stack
 
 ## Alloy
 
