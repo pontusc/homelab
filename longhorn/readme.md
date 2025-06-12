@@ -6,9 +6,9 @@ Installed using `helm install longhorn longhorn/longhorn -n longhorn-system --cr
 
 Open-iscsi (services iscsid and open-iscsi need to be enabled and started)
 
-## Prometheus Operator for Longhorn metrics
+## Prometheus ServiceMonitor for Longhorn metrics
 
-Get the CRD's from [here](https://prometheus-operator.dev/docs/getting-started/installation/#install-using-yaml-files)
+See [monitoring](/monitoring) and install the kube-prometheus-stack helm chart. You have to add the label `release=kube-prometheus-stack` for it to be discovered.
 
 ## Missing CRDs
 

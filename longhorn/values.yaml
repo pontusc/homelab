@@ -507,7 +507,8 @@ metrics:
     # -- Setting that allows the creation of a Prometheus ServiceMonitor resource for Longhorn Manager components.
     enabled: true
     # -- Additional labels for the Prometheus ServiceMonitor resource.
-    additionalLabels: {}
+    additionalLabels:
+      release: kube-prometheus-stack
     # -- Annotations for the Prometheus ServiceMonitor resource.
     annotations: {}
     # -- Interval at which Prometheus scrapes the metrics from the target.
