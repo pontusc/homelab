@@ -6,7 +6,7 @@ Grafana & prometheus deployed under namespace monitoring
 
 Install using `helm install -n monitoring kube-prometheus-stack prometheus-community/kube-prometheus-stack -f stack-values.yml`.
 
-Installs Grafana, Prometheus, Prometheus-Operator and some more, see [this](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack).
+Installs Grafana, Prometheus, Prometheus-Operator and some more, see [this](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack). Also brings a lot of necessary CRD's for stuff like ServiceMonitor.
 
 ## Grafana
 
