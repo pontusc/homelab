@@ -376,7 +376,7 @@ longhornManager:
     # -- Format of Longhorn Manager logs. (Options: "plain", "json")
     format: plain
   # -- PriorityClass for Longhorn Manager.
-  priorityClass: *defaultPriorityClassNameRef
+  priorityClass: *defaultPriorityClassNameRef 
   # -- Toleration for Longhorn Manager on nodes allowed to run Longhorn components.
   tolerations: []
   ## If you want to set tolerations for Longhorn Manager DaemonSet, delete the `[]` in the line above
@@ -402,7 +402,7 @@ longhornDriver:
     # -- Format of longhorn-driver logs. (Options: "plain", "json")
     format: plain
   # -- PriorityClass for Longhorn Driver.
-  priorityClass: *defaultPriorityClassNameRef
+  priorityClass: *defaultPriorityClassNameRef 
   # -- Toleration for Longhorn Driver on nodes allowed to run Longhorn components.
   tolerations: []
   ## If you want to set tolerations for Longhorn Driver Deployer Deployment, delete the `[]` in the line above
@@ -421,7 +421,7 @@ longhornUI:
   # -- Replica count for Longhorn UI.
   replicas: 2
   # -- PriorityClass for Longhorn UI.
-  priorityClass: *defaultPriorityClassNameRef
+  priorityClass: *defaultPriorityClassNameRef 
   # -- Affinity for Longhorn UI pods. Specify the affinity you want to use for Longhorn UI.
   affinity:
     podAntiAffinity:
@@ -505,7 +505,7 @@ serviceAccount:
 metrics:
   serviceMonitor:
     # -- Setting that allows the creation of a Prometheus ServiceMonitor resource for Longhorn Manager components.
-    enabled: false
+    enabled: true
     # -- Additional labels for the Prometheus ServiceMonitor resource.
     additionalLabels: {}
     # -- Annotations for the Prometheus ServiceMonitor resource.
