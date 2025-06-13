@@ -10,6 +10,10 @@ spec:
       - "--api.dashboard=true"
       - "--api.disabledashboardad=true"
       - "--api.insecure=true"
+    # Used to preserve source IP
+    service:
+      spec:
+        externalTrafficPolicy: Local
     providers:
       kubernetesCRD:
         allowCrossNamespace: true

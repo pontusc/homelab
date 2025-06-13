@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ip-test
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ip-test
+  template:
+    metadata:
+      labels:
+        app: ip-test
+    spec:
+      containers:
+      - name: ip-test
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d/default.conf
+          subPath: default.conf
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: ip-test-config
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ip-test-config
+  namespace: default
+data:
+  default.conf: |
+    server {
+        listen 80;
+        location / {
+            add_header Content-Type text/plain;
+            return 200 "Remote IP: $remote_addr\nX-Forwarded-For: $http_x_forwarded_for\nX-Real-IP: $http_x_real_ip\n";
+        }
+    }
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ip-test-service
+  namespace: default
+spec:
+  selector:
+    app: ip-test
+  ports:
+  - port: 80
+    targetPort: 80
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ip-test-ingress
+  namespace: default
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+spec:
+  rules:
+  - host: ip-test.nejlikka.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ip-test-service
+            port:
+              number: 80
