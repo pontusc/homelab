@@ -32,11 +32,11 @@ data:
           href: https://github.com/pontusc/nvim
           description: Neovim conf
 
-      - Rekurrens:
+      - Course:
         - abbr: GL
           icon: gitlab.png
-          href: https://git.chasacademy.dev/chas-challenge-2025/group-12/rekurrens
-          description: CC
+          href: https://git.chasacademy.dev/group-1-adv-devops/adv-devops-grp1
+          description: Advanced DevOps
   custom.css: ""
   custom.js: ""
   docker.yaml: ""
