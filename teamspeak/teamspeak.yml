@@ -11,7 +11,7 @@ metadata:
   namespace: teamspeak
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   storageClassName: longhorn
   resources:
     requests:
@@ -36,28 +36,32 @@ spec:
       labels:
         app: teamspeak
     spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      nodeSelector:
+        kubernetes.io/hostname: worker-1
       containers:
-      - name: teamspeak-server
-        image: teamspeak:3.13.7
-        ports:
-        - name: voice
-          containerPort: 9987
-          protocol: UDP
-        - name: file-transfer
-          containerPort: 30033
-        - name: server-query
-          containerPort: 10011
-        resources:
-        env:
-        - name: TS3SERVER_LICENSE
-          value: accept
-        volumeMounts:
-        - mountPath: /var/ts3server/
-          name: teamspeak-data
+        - name: teamspeak-server
+          image: teamspeak:3.13.7
+          ports:
+            - name: voice
+              containerPort: 9987
+              protocol: UDP
+            - name: file-transfer
+              containerPort: 30033
+            - name: server-query
+              containerPort: 10011
+          resources:
+          env:
+            - name: TS3SERVER_LICENSE
+              value: accept
+          volumeMounts:
+            - mountPath: /var/ts3server/
+              name: teamspeak-data
       volumes:
-      - name: teamspeak-data
-        persistentVolumeClaim:
-          claimName: teamspeak-pvc
+        - name: teamspeak-data
+          persistentVolumeClaim:
+            claimName: teamspeak-pvc
 
 ---
 apiVersion: v1
@@ -69,16 +73,16 @@ metadata:
     app: teamspeak
 spec:
   ports:
-  - port: 9987
-    targetPort: voice
-    protocol: UDP
-    name: voice
-  - port: 30033
-    targetPort: file-transfer
-    name: file-transfer
-  - port: 10011
-    targetPort: server-query
-    name: server-query
+    - port: 9987
+      targetPort: voice
+      protocol: UDP
+      name: voice
+    - port: 30033
+      targetPort: file-transfer
+      name: file-transfer
+    - port: 10011
+      targetPort: server-query
+      name: server-query
   selector:
     app: teamspeak
 
@@ -90,13 +94,13 @@ metadata:
   namespace: teamspeak
 spec:
   entryPoints:
-  - ts-filetransfer
+    - ts-filetransfer
   routes:
-  - match: HostSNI(`*`)
-    # - match: HostSNI(`ts.nejlikka.com`)
-    services:
-    - name: teamspeak
-      port: file-transfer
+    - match: HostSNI(`*`)
+      # - match: HostSNI(`ts.nejlikka.com`)
+      services:
+        - name: teamspeak
+          port: file-transfer
 
 ---
 apiVersion: traefik.io/v1alpha1
@@ -106,13 +110,13 @@ metadata:
   namespace: teamspeak
 spec:
   entryPoints:
-  - ts-serverquery
+    - ts-serverquery
   routes:
-  - match: HostSNI(`*`)
-    # - match: HostSNI(`ts.nejlikka.com`)
-    services:
-    - name: teamspeak
-      port: server-query
+    - match: HostSNI(`*`)
+      # - match: HostSNI(`ts.nejlikka.com`)
+      services:
+        - name: teamspeak
+          port: server-query
 
 ---
 apiVersion: traefik.io/v1alpha1
@@ -122,8 +126,8 @@ metadata:
   namespace: teamspeak
 spec:
   entryPoints:
-  - ts-voice
+    - ts-voice
   routes:
-  - services:
-    - name: teamspeak
-      port: voice
+    - services:
+        - name: teamspeak
+          port: voice
